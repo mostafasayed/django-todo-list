@@ -1,0 +1,10 @@
+{% extends "main/header.html" %} {% block content %} {% load crispy_forms_tags%}
+<div class="wrapper">
+  <div class="form-title">Add new Task</div>
+  <form method="POST">
+    {% csrf_token %} {{ addItem_form|crispy }}
+    <button class="btn btn-primary" type="submit">Submit</button>
+    <a href="/">Go Back</a>
+  </form>
+</div>
+{% endblock %}

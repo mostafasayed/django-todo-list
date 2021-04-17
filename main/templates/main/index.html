@@ -1,0 +1,52 @@
+{% extends "main/header.html" %} {% block content %}
+<div class="wrapper">
+  <div class="form-title">Here you can track your list</div>
+  <div class="action-button">
+    <button class="btn btn-info pad">
+      <i class="fa fa-check-circle"
+        ><a class="remove-style" href="/addItem">Add</a></i
+      >
+    </button>
+    <button class="btn btn-danger pad">
+      <i class="fa fa-trash"
+        ><a class="remove-style" href="/logout">Logout</a></i
+      >
+    </button>
+  </div>
+  <table class="table table-bordered table-striped left text">
+    <thead class="thead-dark">
+      <td class="bg-info text-white">Title</td>
+      <td class="bg-info text-white">Description</td>
+      <td class="bg-info text-white">Created At</td>
+      <td class="bg-info text-white">Deadline</td>
+      <td class="bg-info text-white">Status</td>
+      <td class="bg-info text-white">Actions</td>
+    </thead>
+    {% for todo in todos %} {% with todo_num=forloop.counter0 %}
+    <tr class="{% if todo.status == 'closed' %} text-info {% endif %}">
+      <td><span class="align-middle">{{ todo.title }}</span></td>
+      <td><span class="align-middle">{{ todo.description }}</span></td>
+      <td><span class="align-middle">{{ todo.created_at }}</span></td>
+      <td><span class="align-middle">{{ todo.deadline }}</span></td>
+      <td><span class="align-middle">{{ todo.status }}</span></td>
+      <td>
+        {% if todo.status != 'closed' %}
+        <button class="btn btn-success pad">
+          <i class="fa fa-check-circle"
+            ><a class="remove-style" href="/updateItem/{{todo.id}}">Edit</a></i
+          >
+        </button>
+        {% endif %}
+        <button class="btn btn-danger pad">
+          <i class="fa fa-trash"
+            ><a class="remove-style" href="/deleteItem/{{todo.id}}"
+              >Delete</a
+            ></i
+          >
+        </button>
+      </td>
+    </tr>
+    {% endwith %} {% endfor %}
+  </table>
+</div>
+{% endblock %}
